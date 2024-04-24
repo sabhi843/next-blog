@@ -3,7 +3,7 @@ import styles from "./blogPage.module.css";
 import CardList from "@/components/CardList/CardList";
 import Menu from "@/components/Menu/Menu";
 
-const page = ({ searchParams }) => {
+const BlogPage = ({ searchParams }) => {
   const page = parseInt(searchParams) || 1;
   const { cat } = searchParams;
   return (
@@ -17,4 +17,4 @@ const page = ({ searchParams }) => {
   );
 };
 
-export default page;
+export default BlogPage;
