@@ -8,14 +8,14 @@ import MenuCategories from "../menuCategories/MenuCategories";
 const Menu = () => {
   return (
     <div className={styles.container}>
-      <h2 className={styles.subTitle}>What's hot</h2>
+      <h2 className={styles.subTitle}>What&apos;s hot</h2>
       <h1 className={styles.title}>Most Popular</h1>
       <MenuPosts withImage={false} />
       <h2 className={styles.subTitle}>Discover By topic</h2>
       <h1 className={styles.title}>Categories</h1>
       <MenuCategories />
       <h2 className={styles.subTitle}>Chosen By the Editor</h2>
-      <h1 className={styles.title}>Editor's Pick</h1>
+      <h1 className={styles.title}>Editor&apos;s Pick</h1>
       <MenuPosts withImage={true} />
     </div>
   );
