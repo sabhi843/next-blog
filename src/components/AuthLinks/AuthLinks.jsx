@@ -9,7 +9,7 @@ const AuthLinks = () => {
   const [open, setOpen] = useState(false);
 
   const { status, data: session, error } = useSession();
-  console.log(status);
+  // console.log(status);
   return (
     <>
       {status === "unauthenticated" ? (

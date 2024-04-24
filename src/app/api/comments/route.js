@@ -2,28 +2,21 @@ import { getAuthSession } from "@/utils/auth";
 import prisma from "@/utils/connect";
 import { NextRequest, NextResponse } from "next/server";
 
+// GET ALL COMMENTS OF A POST
+
 export const GET = async (req) => {
   const { searchParams } = new URL(req.url);
 
-  const page = parseInt(searchParams.get("page")) || 1;
-  const cat = searchParams.get("cat");
-
-  const POST_PER_PAGE = 2;
-  const skip = Math.max(0, POST_PER_PAGE * (page - 1));
-  const query = {
-    take: POST_PER_PAGE,
-    skip: skip,
-    where: {
-      ...(cat && { catSlug: cat }),
-    },
-  };
-
+  const postSlug = searchParams.get("postSlug");
   try {
-    const [posts, count] = await prisma.$transaction([
-      prisma.post.findMany(query),
-      prisma.post.count({ where: query.where }),
-    ]);
-    return new NextResponse(JSON.stringify({ posts, count }, { status: 200 }));
+    const comments = await prisma.comment.findMany({
+      where: {
+        ...(postSlug && { postSlug }),
+      },
+      include: { user: true },
+    });
+
+    return new NextResponse(JSON.stringify(comments, { status: 200 }));
   } catch (error) {
     console.log(error);
     return new NextResponse(
@@ -32,10 +25,10 @@ export const GET = async (req) => {
   }
 };
 
-// to create a post
+// to create a comment
 export const POST = async (req) => {
   const session = await getAuthSession();
-  // console.log(session);
+
   if (!session) {
     return new NextResponse(
       JSON.stringify({ message: "not authenticated" }, { status: 401 })
@@ -43,11 +36,11 @@ export const POST = async (req) => {
   }
   try {
     const body = await req.json();
-    const post = await prisma.post.create({
+    const comment = await prisma.comment.create({
       data: { ...body, userEmail: session.user.email },
     });
 
-    return new NextResponse(JSON.stringify(post, { status: 200 }));
+    return new NextResponse(JSON.stringify(comment, { status: 200 }));
   } catch (error) {
     console.log(error);
     return new NextResponse(
