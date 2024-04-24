@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "path/to/your/entry/file",
+      "use": "@vercel/node",
+      "config": {
+        "maxLambdaSize": "50mb"
+      },
+      "functions": {
+        "api/*": {
+          "memory": 1024
+        }
+      }
+    }
+  ],
+  "env": {
+    "DATABASE_URL": "your-database-url"
+  },
+  "build": {
+    "commands": ["prisma generate", "npm run build"]
+  }
+}
