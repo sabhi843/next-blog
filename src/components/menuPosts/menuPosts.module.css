@@ -3,7 +3,7 @@
   margin-bottom: 60px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 35px;
 }
 
 .item {
@@ -23,15 +23,17 @@
   border: 3px solid lightgray;
   object-fit: cover;
 }
+
 .textContainer {
   flex: 4;
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
+
 .category {
   padding: 3px 8px;
-  background-repeat: 10px;
+  border-radius: 10px;
   font-size: 12px;
   color: white;
   width: max-content;
@@ -40,14 +42,25 @@
 .category.travel {
   background-color: #ff7857;
 }
-.category.food {
-  background-color: #ff7857;
+
+.culture {
+  background-color: #ffb14f;
 }
-.category.culture {
-  background-color: #ff7857;
+
+.food {
+  background-color: #7fb881;
 }
-.category.fashion {
-  background-color: #ff7857;
+
+.fashion {
+  background-color: #ff7887;
+}
+
+.coding {
+  background-color: #775aec;
+}
+
+.style {
+  background-color: #789cff;
 }
 
 .postTitle {
