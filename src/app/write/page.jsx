@@ -140,13 +140,14 @@ const WritePage = () => {
           </div>
         )}
         {/* Conditionally render ReactQuill only on the client-side */}
-
-        <ReactQuill
-          theme="bubble"
-          value={value}
-          onChange={setValue}
-          placeholder="Tell your story..."
-        />
+        {typeof window !== "undefined" && (
+          <ReactQuill
+            theme="bubble"
+            value={value}
+            onChange={setValue}
+            placeholder="Tell your story..."
+          />
+        )}
       </div>
       <button className={styles.publish} onClick={handleSubmit}>
         Publish
