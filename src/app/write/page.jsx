@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import "react-quill/dist/quill.bubble.css";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import dynamic from "next/dynamic";
 import {
   getStorage,
   ref,
@@ -139,13 +140,15 @@ const WritePage = () => {
             </button>
           </div>
         )}
-        <ReactQuill
-          className={styles.textArea}
-          theme="bubble"
-          value={value}
-          onChange={setValue}
-          placeholder="Tell your story..."
-        />
+        {/* Conditionally render ReactQuill only on the client-side */}
+        {typeof document !== "undefined" && (
+          <DynamicReactQuill
+            theme="bubble"
+            value={value}
+            onChange={setValue}
+            placeholder="Tell your story..."
+          />
+        )}
       </div>
       <button className={styles.publish} onClick={handleSubmit}>
         Publish
