@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import "react-quill/dist/quill.bubble.css";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import dynamic from "next/dynamic";
 import {
   getStorage,
   ref,
@@ -15,8 +14,6 @@ import {
 } from "firebase/storage";
 import { app } from "@/utils/firebase";
 import ReactQuill from "react-quill";
-
-const DynamicReactQuill = dynamic(() => import("react-quill"), { ssr: false }); // Use dynamic import with ssr: false to exclude ReactQuill from server-side rendering
 
 const WritePage = () => {
   const { status } = useSession();
@@ -42,13 +39,13 @@ const WritePage = () => {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
+          // console.log("Upload is " + progress + "% done");
           switch (snapshot.state) {
             case "paused":
-              console.log("Upload is paused");
+              // console.log("Upload is paused");
               break;
             case "running":
-              console.log("Upload is running");
+              // console.log("Upload is running");
               break;
           }
         },
@@ -144,7 +141,7 @@ const WritePage = () => {
         )}
         {/* Conditionally render ReactQuill only on the client-side */}
         {typeof document !== "undefined" && (
-          <DynamicReactQuill
+          <ReactQuill
             theme="bubble"
             value={value}
             onChange={setValue}
