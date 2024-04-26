@@ -16,6 +16,8 @@ import {
 import { app } from "@/utils/firebase";
 import ReactQuill from "react-quill";
 
+const DynamicReactQuill = dynamic(() => import("react-quill"), { ssr: false }); // Use dynamic import with ssr: false to exclude ReactQuill from server-side rendering
+
 const WritePage = () => {
   const { status } = useSession();
   const router = useRouter();
